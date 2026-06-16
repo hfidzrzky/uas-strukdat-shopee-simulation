@@ -33,7 +33,7 @@ Berikut adalah pemetaan logika sistem dan struktur data yang kami bangun di dala
 Program ini dapat dijalankan pada terminal atau *command prompt* tanpa memerlukan instalasi *library* tambahan. Seluruh modul dibuat menggunakan standar bawaan Python.
 1. **Clone repositori ini ke dalam direktori lokal Anda:**
 ```bash
-   git clone [https://github.com/username-kalian/nama-repo-kalian.git](https://github.com/username-kalian/nama-repo-kalian.git)
+   git clone [https://github.com/hfidzrzky/uas-strukdat-shopee-simulation.git](https://github.com/username-kalian/nama-repo-kalian.git)
 ```
 2. Masuk ke dalam folder proyek:
 ```Bash
