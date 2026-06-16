@@ -1,5 +1,3 @@
-# models.py
-
 class Product:
     """
     Representasi entitas produk di dalam sistem e-commerce.
@@ -18,8 +16,10 @@ class Product:
         Magic method untuk memformat tampilan saat objek di-print.
         Sangat berguna untuk antarmuka CLI (Menu Program Wafi).
         """
+        # Format harga dengan titik/koma ribuan
+        harga_format = f"Rp {self.harga:,}"
         # Menambahkan pemisah ribuan pada harga agar terlihat seperti format Rupiah asli
-        return f"[{self.id_produk}] {self.nama:<25} | Rp {self.harga:>8,} | ⭐ {self.rating}"
+        return f"║ {self.id_produk:<6} │ {self.nama:<30} │ {harga_format:<13} │ {self.rating:^7} ║"
 
     def __repr__(self):
         """
@@ -27,8 +27,7 @@ class Product:
         saat objek berada di dalam struktur data List/Array.
         """
         return f"Product(id='{self.id_produk}', nama='{self.nama}', harga={self.harga}, rating={self.rating})"
-
-
+    
 class CartItem:
     """
     Representasi item spesifik di dalam keranjang belanja.

@@ -1,5 +1,3 @@
-# tree_array.py
-
 from models import Product
 
 class TreeNode:
@@ -11,7 +9,6 @@ class TreeNode:
         self.product = product
         self.left = None
         self.right = None
-
 
 class PriceBST:
     """
@@ -69,7 +66,6 @@ class PriceBST:
         if max_price >= node.product.harga:
             self._range_search_recursive(node.right, min_price, max_price, result)
 
-
 class ProductDatabase:
     """
     ArrayList (List bawaan Python) yang bertindak sebagai database utama.
@@ -108,24 +104,49 @@ class ProductDatabase:
         """Endpoint untuk mengambil produk berdasarkan rentang harga via BST."""
         return self.price_index.search_by_price_range(min_price, max_price)
 
-
 # ==========================================
 # BLOK PENGUJIAN MANDIRI (UNIT TEST LOKAL)
 # ==========================================
+def print_table(judul, data_list):
+    """
+    Fungsi helper untuk mencetak tabel dengan gaya UI Terminal Modern.
+    """
+    # Menghitung total lebar ruang di dalam bingkai (67 karakter)
+    lebar_dalam = 8 + 32 + 15 + 9 + 3 
+    
+    # Karakter Unicode Box Drawing
+    garis_judul_atas = "╔" + "═" * lebar_dalam + "╗"
+    garis_judul_bawah= "╠" + "═"*8 + "╦" + "═"*32 + "╦" + "═"*15 + "╦" + "═"*9 + "╣"
+    garis_tengah     = "╠" + "═"*8 + "╬" + "═"*32 + "╬" + "═"*15 + "╬" + "═"*9 + "╣"
+    garis_bawah      = "╚" + "═"*8 + "╩" + "═"*32 + "╩" + "═"*15 + "╩" + "═"*9 + "╝"
+    
+    # 1. Mencetak Judul yang Terbingkai
+    print(f"\n{garis_judul_atas}")
+    print(f"║{judul:^{lebar_dalam}}║") # Judul otomatis rata tengah
+    print(garis_judul_bawah)
+    
+    # 2. Mencetak Header Kolom (menggunakan rata tengah '^' agar rapi)
+    print(f"║ {'ID':^6} │ {'Nama Produk':^30} │ {'Harga':^13} │ {'Rating':^7} ║")
+    print(garis_tengah)
+    
+    # 3. Mencetak Isi Data
+    if not data_list:
+        print(f"║{'Data tidak ditemukan di rentang harga tersebut.':^{lebar_dalam}}║")
+    else:
+        for item in data_list:
+            print(item) # Memanggil format ║ ... │ ... ║ dari models.py
+            
+    # 4. Mencetak Footer Tabel
+    print(garis_bawah)
+
 if __name__ == "__main__":
     # 1. Inisiasi Database
     db = ProductDatabase()
     
-    print("=== KATALOG UTAMA (ARRAY LIST) ===")
-    for prod in db.get_all_products():
-        print(prod)
+    # 2. Menampilkan semua produk (Array List)
+    semua_produk = db.get_all_products()
+    print_table("KATALOG UTAMA (ARRAY LIST)", semua_produk)
 
-    print("\n=== HASIL FILTER HARGA (BST IN-ORDER TRAVERSAL) ===")
-    # Mencari produk dengan harga Rp 50.000 sampai Rp 150.000
+    # 3. Menampilkan hasil filter (BST)
     hasil_filter = db.filter_by_price(50000, 150000)
-    
-    if hasil_filter:
-        for prod in hasil_filter:
-            print(prod)
-    else:
-        print("Tidak ada produk di rentang harga tersebut.")
+    print_table("HASIL FILTER HARGA: Rp50.000 - Rp150.000 (BST IN-ORDER)", hasil_filter)
