@@ -1,14 +1,10 @@
-cat > graph.py << 'EOF'
 import heapq
 
 # =====================================================
-# GRAPH + ALGORITMA DIJKSTRA - RUTE PENGIRIMAN
+# GRAPH + ALGORITMA DIJKSTRA
 # =====================================================
 
 class Graph:
-    """
-    Implementasi Graph menggunakan Adjacency List.
-    """
     def __init__(self):
         self.graph = {}
 
@@ -19,7 +15,7 @@ class Graph:
             self.graph[kota_tujuan] = []
         
         self.graph[kota_asal].append((kota_tujuan, jarak))
-        self.graph[kota_tujuan].append((kota_asal, jarak))  # undirected
+        self.graph[kota_tujuan].append((kota_asal, jarak))
 
     def dijkstra(self, start: str, end: str):
         if start not in self.graph or end not in self.graph:
@@ -45,4 +41,3 @@ class Graph:
                     heapq.heappush(pq, (jarak_baru, tetangga, jalur + [tetangga]))
         
         return float('inf'), []
-EOF

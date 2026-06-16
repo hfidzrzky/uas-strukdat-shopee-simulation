@@ -1,4 +1,3 @@
-cat > linkedlist.py << 'EOF'
 from models import Product
 
 # =====================================================
@@ -6,9 +5,6 @@ from models import Product
 # =====================================================
 
 class NodeKeranjang:
-    """
-    Node untuk Doubly Linked List.
-    """
     def __init__(self, produk: Product, jumlah: int = 1):
         self.produk = produk
         self.jumlah = jumlah
@@ -17,9 +13,6 @@ class NodeKeranjang:
 
 
 class KeranjangBelanja:
-    """
-    Implementasi Doubly Linked List untuk Keranjang Belanja.
-    """
     def __init__(self):
         self.head = None
         self.tail = None
@@ -87,4 +80,3 @@ class KeranjangBelanja:
             total += current.produk.harga * current.jumlah
             current = current.next
         return total
-EOF
