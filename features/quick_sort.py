@@ -1,7 +1,6 @@
 # quick_sort.py
 from models import Product  # Mengimpor blueprint Product dari file models.py
 
-
 class QuickSortFitur:  # Membuat kelas untuk fitur Quick Sort sesuai prinsip OOP
     def __init__(
         self,

@@ -1,4 +1,3 @@
-cat > graph.py << 'EOF'
 import heapq
 
 # =====================================================
@@ -45,4 +44,3 @@ class Graph:
                     heapq.heappush(pq, (jarak_baru, tetangga, jalur + [tetangga]))
         
         return float('inf'), []
-EOF

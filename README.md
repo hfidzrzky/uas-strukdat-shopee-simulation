@@ -70,25 +70,34 @@ python -m unittest tests/test_linkedlist_graph.py
 
 ### Penyesuaian Struktur Folder
 
-Agar perintah `python -m unittest discover` di atas bisa berjalan dengan mulus tanpa *error*, pastikan kamu mengarahkan tim (khususnya anggota yang bertugas sebagai *QA & Analyst*) untuk membuat satu folder khusus bernama `tests` di dalam repositori utama.
-
-Struktur repositori akhirnya akan terlihat sangat profesional seperti ini:
+Struktur repositori akhir:
 
 ```text
 📁 UAS_StrukturData/
 │
-├── 📁 tests/                     # 👈 Folder khusus unit test
+├──📁 features/ # Folder Khusus Logic Features
+│  ├─ __init__.py         # File kosong agar Python mengenali folder ini sebagai modul
+│  ├─ array_list.py
+│  ├─ bubble_sort.py
+│  ├─ graph.py
+│  ├─ linkedlist.py
+│  ├─ queue_search.py
+│  ├─ quick_sort.py
+│  ├─ stack.py
+│  └─ tree.py
+│
+├── 📁 tests/ # Folder khusus unit test
 │   ├── __init__.py               # File kosong agar Python mengenali folder ini sebagai modul
 │   ├── test_queue_search.py      # Pengujian logic milik Wafi
-│   ├── test_stack_sorting.py     # Pengujian logic milik Haris
-│   ├── test_tree_array.py        # Pengujian logic milik Hafidz
-│   └── test_linkedlist_graph.py  # Pengujian logic milik Galang
+│   ├── test_stack.py             # Pengujian logic milik Haris
+│   ├── test_quick_sort.py        # Pengujian logic milik Haris
+│   ├── test_bubble_sort.py       # Pengujian logic milik Haris
+│   ├── test_tree.py              # Pengujian logic milik Hafidz
+│   ├── test_array_list.py        # Pengujian logic milik Hafidz
+│   └── test_linkedlist.py        # Pengujian logic milik Galang
+│   └── test_graph.py             # Pengujian logic milik Galang
 │
-├── models.py              
-├── queue_search.py        
-├── stack_sorting.py       
-├── tree_array.py          
-├── linkedlist_graph.py    
+├── models.py                 
 ├── main.py                
 └── README.md
 ```

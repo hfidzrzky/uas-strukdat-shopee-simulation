@@ -1,7 +1,6 @@
 # bubble_sort.py
 from models import Product  # Mengimpor blueprint Product dari file models.py
 
-
 class BubbleSortFitur:  # Membuat kelas untuk fitur Bubble Sort sesuai prinsip OOP
     def __init__(
         self,
