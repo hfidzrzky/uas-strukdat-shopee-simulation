@@ -37,7 +37,7 @@ class KeranjangBelanja:
             self.tail = node_baru
             
         self.ukuran += 1
-        print(f"✅ Berhasil ditambahkan: {produk.nama} x{jumlah}")
+        print(f"Berhasil ditambahkan: {produk.nama} x{jumlah}")
 
     def hapus_barang(self, id_produk: int) -> bool:
         """Menghapus barang dari keranjang berdasarkan ID produk"""
@@ -71,7 +71,7 @@ class KeranjangBelanja:
     def tampilkan_keranjang(self):
         """Menampilkan seluruh isi keranjang belanja"""
         if not self.head:
-            print("🛒 Keranjang belanja masih kosong.")
+            print("Keranjang belanja masih kosong.")
             return
         
         print("\n" + "="*60)
