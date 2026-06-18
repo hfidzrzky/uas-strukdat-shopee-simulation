@@ -16,9 +16,7 @@ from features.stack import Stack                              # Haris
 from features.linkedlist import KeranjangBelanja             # Galang
 from features.graph import Graph                              # Galang
 
-
 # TAMPILAN CLI 
-
 class C:
     # Kumpulan kode warna ANSI untuk mempercantik output terminal
     RESET = "\033[0m"
@@ -33,7 +31,6 @@ class C:
     PUTIH = "\033[97m"
     ABU = "\033[90m"
 
-
 def enable_ansi():
     # Mengaktifkan pewarnaan ANSI
     if os.name == "nt":
@@ -43,16 +40,13 @@ def enable_ansi():
     except Exception:
         pass
 
-
 def clear_screen():
     # Membersihkan layar terminal lintas platform
     os.system("cls" if os.name == "nt" else "clear")
 
-
 def warna(teks, *kode):
     # Membungkus teks dengan satu/lebih kode warna lalu mereset di akhir
     return "".join(kode) + str(teks) + C.RESET
-
 
 def banner():
     logo = r"""
@@ -68,10 +62,8 @@ def banner():
     print(warna("        UAS Struktur Data | Tim: Wafi, Haris, Hafidz, Galang",
                 C.ABU))
 
-
 def garis(char="─", panjang=60, kode=C.ABU):
     print(warna(char * panjang, kode))
-
 
 def header(judul, ikon=""):
     teks = f"{ikon}  {judul}" if ikon else judul
@@ -82,36 +74,28 @@ def header(judul, ikon=""):
           + warna("║", C.CYAN))
     print(warna("╚" + "═" * lebar + "╝", C.CYAN))
 
-
 def opsi(kode, label, ikon="", badge=""):
     nomor = warna(f"  [{kode}]", C.BOLD, C.KUNING)
     ikon_txt = f" {ikon} " if ikon else " "
     print(f"{nomor}{ikon_txt} {label}{badge}")
 
-
 def sukses(pesan):
     print(warna(f"  ✔ {pesan}", C.HIJAU))
-
 
 def gagal(pesan):
     print(warna(f"  ✖ {pesan}", C.MERAH))
 
-
 def info(pesan):
     print(warna(f"  • {pesan}", C.KUNING))
-
 
 def pause():
     input(warna("\n  Tekan Enter untuk kembali ke menu...", C.DIM))
 
-
 def tanya(prompt):
     return input(warna(prompt, C.PUTIH)).strip()
 
-
 def tanya_pilihan(prompt="\n  ➤ Pilih menu: "):
     return input(warna(prompt, C.CYAN)).strip()
-
 
 def tanya_int(prompt):
     nilai = tanya(prompt)
@@ -121,10 +105,8 @@ def tanya_int(prompt):
         gagal("Input harus berupa angka.")
         return None
 
-
 def tanya_id(prompt):
     return tanya(prompt).upper()
-
 
 # ============================================================================
 # HELPER TAMPILAN PRODUK dan STRUKTUR
@@ -153,7 +135,6 @@ def tampilkan_struktur_queue(antrian):
     info(f"Jumlah elemen: {antrian.size()}")
     info(f"Front (dilayani berikutnya): {antrian.front().nama}")
 
-
 def bangun_graph_pengiriman():
     # Menyiapkan graph rute logistik antar-kota gudang (mock data demo)
     g = Graph()
@@ -170,14 +151,12 @@ def bangun_graph_pengiriman():
         g.tambah_rute(kota_asal, kota_tujuan, jarak)
     return g
 
-
 # ============================================================================
 # MENU: KATALOG, PENCARIAN, CHECKOUT, FILTER HARGA
 # ============================================================================
 
 def menu_katalog(db):
     tampilkan_produk("KATALOG PRODUK", db.get_all_products())
-
 
 def menu_pencarian(db):
     catalog = db.get_all_products()
@@ -205,7 +184,6 @@ def menu_pencarian(db):
     else:
         gagal("Produk tidak ditemukan.")
 
-
 def menu_filter_harga(db):
     header("FILTER RENTANG HARGA (BST In-Order)", "💰")
     min_harga = tanya_int("  Harga minimal (Rp): ")
@@ -220,7 +198,6 @@ def menu_filter_harga(db):
 
     hasil = db.filter_by_price(min_harga, max_harga)
     tampilkan_produk(f"HASIL FILTER: Rp{min_harga:,} - Rp{max_harga:,}", hasil)
-
 
 def menu_checkout(db, antrian):
     catalog = db.get_all_products()
@@ -263,7 +240,6 @@ def menu_checkout(db, antrian):
     else:
         gagal("Pilihan tidak valid.")
 
-
 # ============================================================================
 # MENU: SORTING dan RIWAYAT NAVIGASI 
 # ============================================================================
@@ -284,11 +260,9 @@ def menu_sorting():
     else:
         gagal("Pilihan tidak valid.")
 
-
 def menu_navigasi_stack():
     header("RIWAYAT NAVIGASI (Stack - modul Haris)", "🧭")
     Stack().riwayatnavigasi()
-
 
 # ============================================================================
 # MENU: KERANJANG (Linked List) dan PENGIRIMAN (Graph) 
@@ -324,7 +298,6 @@ def menu_keranjang(db, keranjang):
     else:
         gagal("Pilihan tidak valid.")
 
-
 def menu_pengiriman():
     header("SIMULASI PENGIRIMAN (Graph / Dijkstra - modul Galang)", "🚚")
     g = bangun_graph_pengiriman()
@@ -350,7 +323,6 @@ def menu_pengiriman():
     info(f"Total jarak    : {jarak} km")
     info(f"Estimasi ongkir: Rp{ongkir:,} (Rp{TARIF_PER_KM:,}/km)")
 
-
 # ============================================================================
 # MENU UTAMA dan ALUR PROGRAM
 # ============================================================================
@@ -374,7 +346,6 @@ def tampilkan_menu_utama(antrian):
     opsi("8", "Riwayat Navigasi (Stack)", "🧭")
     opsi("0", "Keluar", "🚪")
     garis()
-
 
 def main():
     enable_ansi()
@@ -412,7 +383,6 @@ def main():
         else:
             gagal("Pilihan tidak valid, coba lagi.")
             pause()
-
 
 if __name__ == "__main__":
     main()
