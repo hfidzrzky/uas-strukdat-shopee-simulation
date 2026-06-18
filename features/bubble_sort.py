@@ -1,25 +1,12 @@
 # bubble_sort.py
 from models import Product  # Mengimpor blueprint Product dari file models.py
-
+from features.array_list import ProductDatabase as db #import database dari array_list.py
 
 class BubbleSortFitur:  # Membuat kelas untuk fitur Bubble Sort sesuai prinsip OOP
     def __init__(
         self,
     ):  # Konstruktor untuk menginisialisasi objek saat pertama kali dibuat
-        self.daftar_produk = [  # Membuat list internal berisi kumpulan data produk tiruan Shopee
-            Product(
-                "SP01", "Sepatu Running Adidas", 850000, 4.8
-            ),  # Menambahkan produk pertama ke dalam list
-            Product(
-                "HP02", "iPhone 15 Pro Max", 22000000, 4.9
-            ),  # Menambahkan produk kedua dengan harga tertinggi
-            Product(
-                "KM03", "Kemeja Flanel Uniqlo", 350000, 4.5
-            ),  # Menambahkan produk ketiga ke dalam list
-            Product(
-                "TS04", "Tas Ransel Eiger", 450000, 4.7
-            ),  # Menambahkan produk keempat ke dalam list
-        ]  # Menutup deklarasi array list produk internal
+        self.daftar_produk = db().get_all_products()  # ini konfigurasi ke variabel lokal agar database bisa digunakan
 
     def urutkan_harga_asc(
                 self,

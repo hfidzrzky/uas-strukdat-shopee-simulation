@@ -1,13 +1,9 @@
-# queue_search.py
-# ==================================================
-# Nama  : Wafi
 # Queue dan Binary Search
-#
+# ==================================================
 # Queue digunakan untuk simulasi antrian checkout.
 # Binary Search digunakan untuk mencari produk
 # berdasarkan ID atau nama produk.
 # ==================================================
-
 
 class Queue:
     # Implementasi Queue (FIFO)
@@ -45,7 +41,6 @@ class Queue:
         # Menampilkan seluruh isi antrian
         return list(self.items)
 
-
 def binary_search_by_id(products, target_id):
     # Mencari produk berdasarkan ID menggunakan Binary Search.
     # Syarat: products harus sudah terurut menaik berdasarkan id_produk.
@@ -63,7 +58,6 @@ def binary_search_by_id(products, target_id):
             right = mid - 1
 
     return None
-
 
 def binary_search_by_name(products, target_name):
     # Mencari produk berdasarkan nama menggunakan Binary Search.
@@ -85,11 +79,9 @@ def binary_search_by_name(products, target_name):
 
     return None
 
-
 def sort_by_id(products):
     # Mengurutkan salinan produk berdasarkan id_produk (untuk binary search by ID).
     return sorted(products, key=lambda p: p.id_produk)
-
 
 def sort_by_name(products):
     # Mengurutkan salinan produk berdasarkan nama (untuk binary search by name).
