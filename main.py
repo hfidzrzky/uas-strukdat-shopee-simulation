@@ -78,6 +78,7 @@ def header(judul, ikon=""):
 
 def opsi(kode, label, ikon="", badge=""):
     kamus_menu[str(kode)] = label
+    kamus_menu[str(kode)] = label
     nomor = warna(f"  [{kode}]", C.BOLD, C.KUNING)
     ikon_txt = f" {ikon} " if ikon else " "
     print(f"{nomor}{ikon_txt} {label}{badge}")
@@ -395,3 +396,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
