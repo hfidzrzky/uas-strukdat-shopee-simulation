@@ -11,6 +11,7 @@ from features.queue_search import (        # Wafi
 )
 from features.array_list import ProductDatabase, print_table  # Hafidz
 from features.quick_sort import QuickSortFitur                # Haris
+<<<<<<< HEAD
 from features.bubble_sort import BubbleSortFitur              # Haris
 from features.stack import Stack                              # Haris
 from features.linkedlist import KeranjangBelanja             # Galang
@@ -19,6 +20,16 @@ from features.graph import Graph                              # Galang
 
 # TAMPILAN CLI 
 
+=======
+from features.merge_sort import MergeSortFitur              # Haris
+from features.stack import Stack                              # Haris
+from features.linkedlist import KeranjangBelanja             # Galang
+from features.graph import Graph                              # Galang
+stack = Stack()
+kamus_menu = {}
+
+# TAMPILAN CLI 
+>>>>>>> main
 class C:
     # Kumpulan kode warna ANSI untuk mempercantik output terminal
     RESET = "\033[0m"
@@ -33,7 +44,10 @@ class C:
     PUTIH = "\033[97m"
     ABU = "\033[90m"
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 def enable_ansi():
     # Mengaktifkan pewarnaan ANSI
     if os.name == "nt":
@@ -43,17 +57,26 @@ def enable_ansi():
     except Exception:
         pass
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 def clear_screen():
     # Membersihkan layar terminal lintas platform
     os.system("cls" if os.name == "nt" else "clear")
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 def warna(teks, *kode):
     # Membungkus teks dengan satu/lebih kode warna lalu mereset di akhir
     return "".join(kode) + str(teks) + C.RESET
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 def banner():
     logo = r"""
    ____  _   _  ___  ____  ____  _____   ____ ___ __  __
@@ -68,11 +91,17 @@ def banner():
     print(warna("        UAS Struktur Data | Tim: Wafi, Haris, Hafidz, Galang",
                 C.ABU))
 
+<<<<<<< HEAD
 
 def garis(char="─", panjang=60, kode=C.ABU):
     print(warna(char * panjang, kode))
 
 
+=======
+def garis(char="─", panjang=60, kode=C.ABU):
+    print(warna(char * panjang, kode))
+
+>>>>>>> main
 def header(judul, ikon=""):
     teks = f"{ikon}  {judul}" if ikon else judul
     lebar = 58
@@ -82,12 +111,18 @@ def header(judul, ikon=""):
           + warna("║", C.CYAN))
     print(warna("╚" + "═" * lebar + "╝", C.CYAN))
 
+<<<<<<< HEAD
 
 def opsi(kode, label, ikon="", badge=""):
+=======
+def opsi(kode, label, ikon="", badge=""):
+    kamus_menu[str(kode)] = label
+>>>>>>> main
     nomor = warna(f"  [{kode}]", C.BOLD, C.KUNING)
     ikon_txt = f" {ikon} " if ikon else " "
     print(f"{nomor}{ikon_txt} {label}{badge}")
 
+<<<<<<< HEAD
 
 def sukses(pesan):
     print(warna(f"  ✔ {pesan}", C.HIJAU))
@@ -113,6 +148,26 @@ def tanya_pilihan(prompt="\n  ➤ Pilih menu: "):
     return input(warna(prompt, C.CYAN)).strip()
 
 
+=======
+def sukses(pesan):
+    print(warna(f"  ✔ {pesan}", C.HIJAU))
+
+def gagal(pesan):
+    print(warna(f"  ✖ {pesan}", C.MERAH))
+
+def info(pesan):
+    print(warna(f"  • {pesan}", C.KUNING))
+
+def pause():
+    input(warna("\n  Tekan Enter untuk kembali ke menu...", C.DIM))
+
+def tanya(prompt):
+    return input(warna(prompt, C.PUTIH)).strip()
+
+def tanya_pilihan(prompt="\n  ➤ Pilih menu: "):
+    return input(warna(prompt, C.CYAN)).strip()
+
+>>>>>>> main
 def tanya_int(prompt):
     nilai = tanya(prompt)
     try:
@@ -121,11 +176,17 @@ def tanya_int(prompt):
         gagal("Input harus berupa angka.")
         return None
 
+<<<<<<< HEAD
 
 def tanya_id(prompt):
     return tanya(prompt).upper()
 
 
+=======
+def tanya_id(prompt):
+    return tanya(prompt).upper()
+
+>>>>>>> main
 # ============================================================================
 # HELPER TAMPILAN PRODUK dan STRUKTUR
 # ============================================================================
@@ -153,7 +214,10 @@ def tampilkan_struktur_queue(antrian):
     info(f"Jumlah elemen: {antrian.size()}")
     info(f"Front (dilayani berikutnya): {antrian.front().nama}")
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 def bangun_graph_pengiriman():
     # Menyiapkan graph rute logistik antar-kota gudang (mock data demo)
     g = Graph()
@@ -170,7 +234,10 @@ def bangun_graph_pengiriman():
         g.tambah_rute(kota_asal, kota_tujuan, jarak)
     return g
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 # ============================================================================
 # MENU: KATALOG, PENCARIAN, CHECKOUT, FILTER HARGA
 # ============================================================================
@@ -178,7 +245,10 @@ def bangun_graph_pengiriman():
 def menu_katalog(db):
     tampilkan_produk("KATALOG PRODUK", db.get_all_products())
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 def menu_pencarian(db):
     catalog = db.get_all_products()
     header("CARI PRODUK (Binary Search)", "🔍")
@@ -205,7 +275,10 @@ def menu_pencarian(db):
     else:
         gagal("Produk tidak ditemukan.")
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 def menu_filter_harga(db):
     header("FILTER RENTANG HARGA (BST In-Order)", "💰")
     min_harga = tanya_int("  Harga minimal (Rp): ")
@@ -221,7 +294,10 @@ def menu_filter_harga(db):
     hasil = db.filter_by_price(min_harga, max_harga)
     tampilkan_produk(f"HASIL FILTER: Rp{min_harga:,} - Rp{max_harga:,}", hasil)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 def menu_checkout(db, antrian):
     catalog = db.get_all_products()
     header("ANTRIAN CHECKOUT (Queue / FIFO)", "🧾")
@@ -231,7 +307,11 @@ def menu_checkout(db, antrian):
     opsi("4", "Lihat Struktur Queue (FIFO)")
     opsi("0", "Kembali")
     pilihan = tanya_pilihan("\n  ➤ Pilih aksi: ")
+<<<<<<< HEAD
 
+=======
+    Stack(pilihan)
+>>>>>>> main
     if pilihan == "1":
         target = tanya_id("  Masukkan ID produk yang ingin di-checkout: ")
         produk = binary_search_by_id(sort_by_id(catalog), target)
@@ -263,7 +343,10 @@ def menu_checkout(db, antrian):
     else:
         gagal("Pilihan tidak valid.")
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 # ============================================================================
 # MENU: SORTING dan RIWAYAT NAVIGASI 
 # ============================================================================
@@ -271,23 +354,41 @@ def menu_checkout(db, antrian):
 def menu_sorting():
     header("URUTKAN PRODUK (Sorting - modul Haris)", "↕")
     opsi("1", "Quick Sort (harga termurah)")
+<<<<<<< HEAD
     opsi("2", "Bubble Sort (harga termurah)")
+=======
+    opsi("2", "Merge Sort (rating terendah)")
+>>>>>>> main
     opsi("0", "Kembali")
     pilihan = tanya_pilihan("\n  ➤ Pilih algoritma: ")
 
     if pilihan == "1":
+<<<<<<< HEAD
         QuickSortFitur().simulasi_sort()
     elif pilihan == "2":
         BubbleSortFitur().simulasi_sort()
+=======
+        stack("Sub-Menu: Quick Sort")
+        QuickSortFitur().simulasi_sort()
+    elif pilihan == "2":
+        stack("Sub-Menu: Merge Sort")
+        MergeSortFitur().simulasi_sort()
+>>>>>>> main
     elif pilihan == "0":
         return
     else:
         gagal("Pilihan tidak valid.")
 
+<<<<<<< HEAD
 
 def menu_navigasi_stack():
     header("RIWAYAT NAVIGASI (Stack - modul Haris)", "🧭")
     Stack().riwayatnavigasi()
+=======
+def menu_navigasi_stack():
+    header("RIWAYAT NAVIGASI (Stack - modul Haris)", "🧭")
+    print(stack.cetak_riwayat())
+>>>>>>> main
 
 
 # ============================================================================
@@ -324,7 +425,10 @@ def menu_keranjang(db, keranjang):
     else:
         gagal("Pilihan tidak valid.")
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 def menu_pengiriman():
     header("SIMULASI PENGIRIMAN (Graph / Dijkstra - modul Galang)", "🚚")
     g = bangun_graph_pengiriman()
@@ -350,7 +454,10 @@ def menu_pengiriman():
     info(f"Total jarak    : {jarak} km")
     info(f"Estimasi ongkir: Rp{ongkir:,} (Rp{TARIF_PER_KM:,}/km)")
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 # ============================================================================
 # MENU UTAMA dan ALUR PROGRAM
 # ============================================================================
@@ -375,7 +482,10 @@ def tampilkan_menu_utama(antrian):
     opsi("0", "Keluar", "🚪")
     garis()
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 def main():
     enable_ansi()
     db = ProductDatabase()
@@ -398,6 +508,10 @@ def main():
         pilihan = tanya_pilihan("  ➤ Pilih menu: ")
 
         if pilihan == "0":
+<<<<<<< HEAD
+=======
+            stack(pilihan)
+>>>>>>> main
             clear_screen()
             banner()
             print(warna(
@@ -407,12 +521,20 @@ def main():
 
         handler = aksi.get(pilihan)
         if handler:
+<<<<<<< HEAD
+=======
+            nama_terpilih = kamus_menu.get(pilihan, f"Menu {pilihan}")
+            stack(nama_terpilih)
+>>>>>>> main
             handler()
             pause()
         else:
             gagal("Pilihan tidak valid, coba lagi.")
             pause()
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 if __name__ == "__main__":
     main()
