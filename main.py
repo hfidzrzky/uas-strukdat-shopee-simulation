@@ -11,7 +11,6 @@ from features.queue_search import (        # Wafi
 )
 from features.array_list import ProductDatabase, print_table  # Hafidz
 from features.quick_sort import QuickSortFitur                # Haris
-from features.bubble_sort import BubbleSortFitur              # Haris
 from features.stack import Stack                              # Haris
 from features.linkedlist import KeranjangBelanja             # Galang
 from features.graph import Graph                              # Galang
@@ -44,6 +43,7 @@ def clear_screen():
     # Membersihkan layar terminal lintas platform
     os.system("cls" if os.name == "nt" else "clear")
 
+
 def warna(teks, *kode):
     # Membungkus teks dengan satu/lebih kode warna lalu mereset di akhir
     return "".join(kode) + str(teks) + C.RESET
@@ -75,6 +75,7 @@ def header(judul, ikon=""):
     print(warna("╚" + "═" * lebar + "╝", C.CYAN))
 
 def opsi(kode, label, ikon="", badge=""):
+    kamus_menu[str(kode)] = label
     nomor = warna(f"  [{kode}]", C.BOLD, C.KUNING)
     ikon_txt = f" {ikon} " if ikon else " "
     print(f"{nomor}{ikon_txt} {label}{badge}")
@@ -208,7 +209,8 @@ def menu_checkout(db, antrian):
     opsi("4", "Lihat Struktur Queue (FIFO)")
     opsi("0", "Kembali")
     pilihan = tanya_pilihan("\n  ➤ Pilih aksi: ")
-
+    Stack(pilihan)
+    
     if pilihan == "1":
         target = tanya_id("  Masukkan ID produk yang ingin di-checkout: ")
         produk = binary_search_by_id(sort_by_id(catalog), target)
@@ -247,22 +249,15 @@ def menu_checkout(db, antrian):
 def menu_sorting():
     header("URUTKAN PRODUK (Sorting - modul Haris)", "↕")
     opsi("1", "Quick Sort (harga termurah)")
-    opsi("2", "Bubble Sort (harga termurah)")
     opsi("0", "Kembali")
     pilihan = tanya_pilihan("\n  ➤ Pilih algoritma: ")
 
     if pilihan == "1":
-        QuickSortFitur().simulasi_sort()
-    elif pilihan == "2":
-        BubbleSortFitur().simulasi_sort()
     elif pilihan == "0":
         return
     else:
         gagal("Pilihan tidak valid.")
 
-def menu_navigasi_stack():
-    header("RIWAYAT NAVIGASI (Stack - modul Haris)", "🧭")
-    Stack().riwayatnavigasi()
 
 # ============================================================================
 # MENU: KERANJANG (Linked List) dan PENGIRIMAN (Graph) 
@@ -383,6 +378,7 @@ def main():
         else:
             gagal("Pilihan tidak valid, coba lagi.")
             pause()
+
 
 if __name__ == "__main__":
     main()
