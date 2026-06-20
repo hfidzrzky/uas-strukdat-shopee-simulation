@@ -11,10 +11,12 @@ from features.queue_search import (        # Wafi
 )
 from features.array_list import ProductDatabase, print_table  # Hafidz
 from features.quick_sort import QuickSortFitur                # Haris
-from features.bubble_sort import BubbleSortFitur              # Haris
+from features.merge_sort import MergeSortFitur              # Haris
 from features.stack import Stack                              # Haris
 from features.linkedlist import KeranjangBelanja             # Galang
 from features.graph import Graph                              # Galang
+stack = Stack()
+kamus_menu = {}
 
 # TAMPILAN CLI 
 class C:
@@ -75,6 +77,7 @@ def header(judul, ikon=""):
     print(warna("╚" + "═" * lebar + "╝", C.CYAN))
 
 def opsi(kode, label, ikon="", badge=""):
+    kamus_menu[str(kode)] = label
     nomor = warna(f"  [{kode}]", C.BOLD, C.KUNING)
     ikon_txt = f" {ikon} " if ikon else " "
     print(f"{nomor}{ikon_txt} {label}{badge}")
@@ -208,7 +211,7 @@ def menu_checkout(db, antrian):
     opsi("4", "Lihat Struktur Queue (FIFO)")
     opsi("0", "Kembali")
     pilihan = tanya_pilihan("\n  ➤ Pilih aksi: ")
-
+    Stack(pilihan)
     if pilihan == "1":
         target = tanya_id("  Masukkan ID produk yang ingin di-checkout: ")
         produk = binary_search_by_id(sort_by_id(catalog), target)
@@ -247,14 +250,16 @@ def menu_checkout(db, antrian):
 def menu_sorting():
     header("URUTKAN PRODUK (Sorting - modul Haris)", "↕")
     opsi("1", "Quick Sort (harga termurah)")
-    opsi("2", "Bubble Sort (harga termurah)")
+    opsi("2", "Merge Sort (rating terendah)")
     opsi("0", "Kembali")
     pilihan = tanya_pilihan("\n  ➤ Pilih algoritma: ")
 
     if pilihan == "1":
+        stack("Sub-Menu: Quick Sort")
         QuickSortFitur().simulasi_sort()
     elif pilihan == "2":
-        BubbleSortFitur().simulasi_sort()
+        stack("Sub-Menu: Merge Sort")
+        MergeSortFitur().simulasi_sort()
     elif pilihan == "0":
         return
     else:
@@ -262,7 +267,8 @@ def menu_sorting():
 
 def menu_navigasi_stack():
     header("RIWAYAT NAVIGASI (Stack - modul Haris)", "🧭")
-    Stack().riwayatnavigasi()
+    print(stack.cetak_riwayat())
+
 
 # ============================================================================
 # MENU: KERANJANG (Linked List) dan PENGIRIMAN (Graph) 
@@ -369,6 +375,7 @@ def main():
         pilihan = tanya_pilihan("  ➤ Pilih menu: ")
 
         if pilihan == "0":
+            stack(pilihan)
             clear_screen()
             banner()
             print(warna(
@@ -378,6 +385,8 @@ def main():
 
         handler = aksi.get(pilihan)
         if handler:
+            nama_terpilih = kamus_menu.get(pilihan, f"Menu {pilihan}")
+            stack(nama_terpilih)
             handler()
             pause()
         else:
@@ -386,43 +395,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-from models import Product
-from linkedlist import KeranjangBelanja
-from graph import Graph
-
-if __name__ == "__main__":
-    print("="*60)
-    print("     UAS STRUKDAT - SHOPEE SIMULATION")
-    print("="*60 + "\n")
-
-    # === TESTING KERANJANG BELANJA ===
-    print("1. TESTING KERANJANG BELANJA (Linked List)")
-    keranjang = KeranjangBelanja()
-
-    p1 = Product(1, "Laptop Gaming", 8500000, 4.8)
-    p2 = Product(2, "Mouse Wireless", 250000, 4.5)
-    p3 = Product(3, "Keyboard Mechanical", 450000, 4.7)
-
-    keranjang.tambah_barang(p1, 1)
-    keranjang.tambah_barang(p2, 2)
-    keranjang.tambah_barang(p3, 1)
-    
-    keranjang.tampilkan_keranjang()
-    
-    keranjang.hapus_barang(2)
-    keranjang.tampilkan_keranjang()
-
-    print(f"Total harga keranjang: Rp{keranjang.hitung_total():,}\n")
-
-    # === TESTING GRAPH & DIJKSTRA ===
-    print("2. TESTING RUTE PENGIRIMAN (Graph + Dijkstra)")
-    g = Graph()
-    g.tambah_rute("Jakarta", "Bandung", 150)
-    g.tambah_rute("Jakarta", "Surabaya", 780)
-    g.tambah_rute("Bandung", "Surabaya", 650)
-    g.tambah_rute("Jakarta", "Semarang", 450)
-
-    jarak, rute = g.dijkstra("Jakarta", "Surabaya")
-    print(f"Jarak terpendek: {jarak} km")
-    print(f"Rute: {' -> '.join(rute)}")
-    print("="*60)
