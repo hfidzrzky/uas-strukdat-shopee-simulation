@@ -11,9 +11,12 @@ from features.queue_search import (        # Wafi
 )
 from features.array_list import ProductDatabase, print_table  # Hafidz
 from features.quick_sort import QuickSortFitur                # Haris
+from features.merge_sort import MergeSortFitur              # Haris
 from features.stack import Stack                              # Haris
 from features.linkedlist import KeranjangBelanja             # Galang
 from features.graph import Graph                              # Galang
+stack = Stack()
+kamus_menu = {}
 
 # TAMPILAN CLI 
 class C:
@@ -42,7 +45,6 @@ def enable_ansi():
 def clear_screen():
     # Membersihkan layar terminal lintas platform
     os.system("cls" if os.name == "nt" else "clear")
-
 
 def warna(teks, *kode):
     # Membungkus teks dengan satu/lebih kode warna lalu mereset di akhir
@@ -75,6 +77,7 @@ def header(judul, ikon=""):
     print(warna("╚" + "═" * lebar + "╝", C.CYAN))
 
 def opsi(kode, label, ikon="", badge=""):
+    kamus_menu[str(kode)] = label
     kamus_menu[str(kode)] = label
     nomor = warna(f"  [{kode}]", C.BOLD, C.KUNING)
     ikon_txt = f" {ikon} " if ikon else " "
@@ -210,7 +213,6 @@ def menu_checkout(db, antrian):
     opsi("0", "Kembali")
     pilihan = tanya_pilihan("\n  ➤ Pilih aksi: ")
     Stack(pilihan)
-    
     if pilihan == "1":
         target = tanya_id("  Masukkan ID produk yang ingin di-checkout: ")
         produk = binary_search_by_id(sort_by_id(catalog), target)
@@ -249,14 +251,24 @@ def menu_checkout(db, antrian):
 def menu_sorting():
     header("URUTKAN PRODUK (Sorting - modul Haris)", "↕")
     opsi("1", "Quick Sort (harga termurah)")
+    opsi("2", "Merge Sort (rating terendah)")
     opsi("0", "Kembali")
     pilihan = tanya_pilihan("\n  ➤ Pilih algoritma: ")
 
     if pilihan == "1":
+        stack("Sub-Menu: Quick Sort")
+        QuickSortFitur().simulasi_sort()
+    elif pilihan == "2":
+        stack("Sub-Menu: Merge Sort")
+        MergeSortFitur().simulasi_sort()
     elif pilihan == "0":
         return
     else:
         gagal("Pilihan tidak valid.")
+
+def menu_navigasi_stack():
+    header("RIWAYAT NAVIGASI (Stack - modul Haris)", "🧭")
+    print(stack.cetak_riwayat())
 
 
 # ============================================================================
@@ -364,6 +376,7 @@ def main():
         pilihan = tanya_pilihan("  ➤ Pilih menu: ")
 
         if pilihan == "0":
+            stack(pilihan)
             clear_screen()
             banner()
             print(warna(
@@ -373,12 +386,14 @@ def main():
 
         handler = aksi.get(pilihan)
         if handler:
+            nama_terpilih = kamus_menu.get(pilihan, f"Menu {pilihan}")
+            stack(nama_terpilih)
             handler()
             pause()
         else:
             gagal("Pilihan tidak valid, coba lagi.")
             pause()
 
-
 if __name__ == "__main__":
     main()
+
