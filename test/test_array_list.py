@@ -6,10 +6,6 @@ import os
 # Memastikan Python mendeteksi folder root proyek 'UAS_StrukturData'
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Mencegah ImportError jika berkas models dan features.tree belum lengkap/tidak ditemukan saat testing
-sys.modules['models'] = MagicMock()
-sys.modules['features.tree'] = MagicMock()
-
 # Import kelas yang akan diuji
 from features.array_list import ProductDatabase
 

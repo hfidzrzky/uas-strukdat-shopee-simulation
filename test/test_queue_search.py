@@ -21,7 +21,6 @@ from features.queue_search import (
     sort_by_name,
 )
 
-
 class TestQueue(unittest.TestCase):
     """Menguji perilaku FIFO dari struktur data Queue."""
 
